@@ -1,26 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import "../../styles/style.css";
 import Logo from "@/components/Logo";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "@/firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { useAppDispatch } from "@/store/hooks";
-import { setUserToken } from "@/redux_store/myslice/authSlice";
-import dynamic from "next/dynamic";
-import CustomLogo from "@/components/CustomLogo";
-// import { WhenSignedOut } from "@/components/AuthWhenGuards";
 
-
-const WhenSignedOut = dynamic(() => import('@/components/AuthWhenGuards').then(c => c.WhenSignedOut), { ssr: false })
-
-// const logo = require("../../public/logo.png");
 const Login = () => {
-    const dispatch = useAppDispatch();
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<any>("");
     const [loading, setLoading] = useState<boolean>(false);
@@ -36,151 +22,18 @@ const Login = () => {
             });
             return;
         }
-        setLoading(true);
-        if (email.trim().toLowerCase() === "admin@gmail.com" && password === "123456") {
-            toast.success("Login successful", {
-                duration: 2000,
-                position: "top-right",
-                icon: "🔐",
-            });
-            setTimeout(() => {
-                window.location.href = "/dashboard/admin";
-            }, 2000);
-            // setLoading(false);
-            return;
-        }
-
-        try {
-            await signInWithEmailAndPassword(
-                auth,
-                email.trim().toLocaleLowerCase(),
-                password
-            ).then((userCredential) => {
-                const user = userCredential.user;
-                getUserData(user);
-                setLoading(false);
-                toast.success("Login successful", {
-                    duration: 2000,
-                    position: "top-right",
-                    icon: "🔓",
-                });
-                setTimeout(() => {
-                    window.location.href = "/dashboard/user";
-                }, 2000);
-            });
-        } catch (error: any) {
-            toast.error("Invalid email or password", {
-                duration: 2000,
-                position: "top-right",
-                icon: "🔐",
-            });
-            setLoading(false);
-        }
     };
 
 
-    const getUserData = async (user: any) => {
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-            dispatch(setUserToken(user));
-        } else {
-            return toast.error("User not found", {
-                duration: 2000,
-                position: "top-right",
-                icon: "🔐",
-            });
-        }
-    };
-    useEffect(() => {
-        getUserData;
-    });
-
-    // const handleSignin = async (e: { preventDefault: () => void }) => {
-    //     e.preventDefault();
-
-    //     if (!email || !password) {
-    //         toast.error("Please enter your email and password", {
-    //             duration: 2000,
-    //             position: "top-right",
-    //             icon: "🔐",
-    //         });
-    //         return;
-    //     }
-
-    //     setLoading(true);
-
-    //     try {
-    //         const userCredential = await signInWithEmailAndPassword(
-    //             auth,
-    //             email.trim().toLowerCase(),
-    //             password
-    //         );
-    //         const user = userCredential.user;
-    //         const isAdmin = await checkAdminUser(user);
-    //         await getUserData(user);
-    //         setLoading(false);
-    //         toast.success("Login successful", {
-    //             duration: 2000,
-    //             position: "top-right",
-    //             icon: "🔓",
-    //         });
-    //         setTimeout(() => {
-    //             if (isAdmin) {
-    //                 window.location.href = "/dashboard/admin";
-    //             } else {
-    //                 window.location.href = "/dashboard/user";
-    //             }
-    //         }, 2000);
-    //     } catch (error: any) {
-    //         toast.error("Invalid email or password", {
-    //             duration: 2000,
-    //             position: "top-right",
-    //             icon: "🔐",
-    //         });
-    //         setLoading(false);
-    //     }
-    // };
-
-    // const checkAdminUser = async (user: any) => {
-    //     const adminEmail = "admin@gmail.com";
-    //     return user.email === adminEmail;
-    // };
-
-    // const getUserData = async (user: any) => {
-    //     const docRef = doc(db, "users", user.uid);
-    //     const docSnap = await getDoc(docRef);
-
-    //     if (docSnap.exists()) {
-    //         dispatch(setUserToken(user));
-    //     } else {
-    //         throw new Error("User not found");
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     const unsubscribe = auth.onAuthStateChanged((user) => {
-    //         if (user) {
-    //             getUserData(user).catch((error) => {
-    //                 console.error("Error fetching user data:", error);
-    //             });
-    //         }
-    //     });
-
-    //     return () => {
-    //         unsubscribe();
-    //     };
-    // },);
 
     return (
-        <WhenSignedOut>
+        <>
             <div className="flex bg-[#031525] min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
                 <Toaster />
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <div className="my-2 flex justify-center">
-                        {/* <Logo /> */}
-                        <CustomLogo />
+                        <Logo />
                     </div>
                     <div
                         className="
@@ -295,7 +148,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-        </WhenSignedOut>
+        </>
     );
 };
 

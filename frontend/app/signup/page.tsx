@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import toast, { Toaster } from 'react-hot-toast';
-import "../../styles/style.css";
 import Logo from "@/components/Logo";
+import "../../styles/style.css";
+
 
 const Signup = () => {
     const [name, setName] = useState<string>("")
