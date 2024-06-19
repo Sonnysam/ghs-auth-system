@@ -1,0 +1,9 @@
+.card {
+    border-radius: 50px;
+    background: linear-gradient(145deg, #031321, #031628);
+    box-shadow:  19px 19px 38px #02101d, -19px -19px 38px #041a2d;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
