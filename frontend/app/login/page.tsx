@@ -5,11 +5,15 @@ import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
 import "../../styles/style.css";
 import Logo from "@/components/Logo";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "@/firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<any>("");
     const [loading, setLoading] = useState<boolean>(false);
+    const [userToken, setUserToken] = useState<any>()
 
     const handleSignin = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
@@ -22,8 +26,53 @@ const Login = () => {
             });
             return;
         }
+        setLoading(true);
+        try {
+            await signInWithEmailAndPassword(
+                auth,
+                email.trim().toLocaleLowerCase(),
+                password
+            ).then((userCredential) => {
+                const user = userCredential.user;
+                getUserData(user);
+                setLoading(false);
+                toast.success("Login successful", {
+                    duration: 2000,
+                    position: "top-right",
+                    icon: "🔓",
+                });
+                setTimeout(() => {
+                    window.location.href = "/dashboard";
+                }, 2000);
+            });
+        } catch (error: any) {
+            toast.error("Invalid email or password", {
+                duration: 2000,
+                position: "top-right",
+                icon: "🔐",
+            });
+            setLoading(false);
+        }
     };
 
+
+    const getUserData = async (user: any) => {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            setUserToken(user)
+        } else {
+            return toast.error("User not found", {
+                duration: 2000,
+                position: "top-right",
+                icon: "🔐",
+            });
+        }
+    };
+    useEffect(() => {
+        getUserData;
+    });
 
 
 
