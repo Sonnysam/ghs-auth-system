@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-
-import Profile from "../Profile/page";
+import { FaUserCircle } from "react-icons/fa";
+import { useState, useEffect } from 'react';
+import Link from "next/link";
 
 // Updated Asset interface
 interface Asset {
@@ -77,14 +77,28 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
     asset.assetName.toLowerCase().includes(searchQuery.toLowerCase())
   
   );
-
-   const onHover = " hover:bg-slate-200 hover:text-cyan-950"
-   return(
-      <div>
-        <div className="container mx-auto px-4 py-8">
-      <Profile /> </div>
   
+  const userIdArray = ["a14d", "aq2n"];
+
+  // Function to get a random userId from the list
+  const getRandomUserId = (list:any) => {
+    const randomIndex = Math.floor(Math.random() * list.length);
+    return list[randomIndex];
+  };
+
+  // State to hold the random userId
+  const [randomUserId, setRandomUserId] = useState('');
+
+  // Use useEffect to set the random userId when the component mounts
+  useEffect(() => {
+    setRandomUserId(getRandomUserId(userIdArray));
+  }, [userIdArray]);
+ 
+  return (
     <div className="mx-auto bg-[#031525] min-h-screen px-4 py-8">
+      <Link href={`/Profile/${randomUserId}`}>
+      <FaUserCircle /> 
+      </Link>
       <h2 className="text-2xl font-bold mb-4">Assets Dashboard</h2>
       <input
         type="text"
@@ -97,20 +111,6 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className={`${onHover } border px-4 py-2`}>Tag ID</th>
-              <th className={`${onHover } border px-4 py-2`}>Serial Number</th>
-              <th className={`${onHover } border px-4 py-2`}>Asset Name</th>
-              <th className={`${onHover } border px-4 py-2`}>Description</th>
-              <th className={`${onHover } border px-4 py-2`}>Category</th>
-              <th className={`${onHover } border px-4 py-2`}>Subcategory</th>
-              <th className={`${onHover } border px-4 py-2`}>Procurement Date</th>
-              <th className={`${onHover } border px-4 py-2`}>Vendor Information</th>
-              <th className={`${onHover } border px-4 py-2`}>Location</th>
-              <th className={`${onHover } border px-4 py-2`}>Department</th>
-              <th className={`${onHover } border px-4 py-2`}>Condition &amp; Status</th>
-              <th className={`${onHover } border px-4 py-2`}>Maintenance Records</th>
-              <th className={`${onHover } border px-4 py-2`}>Warranty Info.</th>
-              <th className={`${onHover } border px-4 py-2`}>Lifecycle Tracking</th>
               <th className="border px-4 py-2">Tag ID</th>
               <th className="border px-4 py-2">Serial Number</th>
               <th className="border px-4 py-2">Asset Name</th>
@@ -130,20 +130,6 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
           <tbody>
             {filteredAssets.map((asset) => (
               <tr key={asset.tagId}>
-                <td className={`${onHover } border px-4 py-2`}>{asset.tagId}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.serialNumber}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.assetName}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.description}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.category}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.subcategory}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.procurementDate}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.vendorInformation}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.location}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.department}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.conditionAndStatus}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.maintenanceRecords}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.warrantyInformation}</td>
-                <td className={`${onHover } border px-4 py-2`}>{asset.lifecycleTracking}</td>
                 <td className="border px-4 py-2">{asset.tagId}</td>
                 <td className="border px-4 py-2">{asset.serialNumber}</td>
                 <td className="border px-4 py-2">{asset.assetName}</td>
@@ -164,7 +150,7 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
         </table>
       </div>
     </div>
-      </div>
+    
    )
 }
  

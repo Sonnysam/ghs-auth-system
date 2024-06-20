@@ -13,7 +13,7 @@ export default class UserProfile {
         // Initialize with predefined dummy users
         this.users = {
             'user1': {
-                name: 'John Doe',
+                name: 'John Kumah',
                 userId: "a14d",
                 department: 'Sales',
                 nextPayDay: '2024-07-01'

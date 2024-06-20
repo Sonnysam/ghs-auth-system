@@ -77,13 +77,13 @@ const Signup = () => {
                             htmlFor="username"
                             className="block text-sm font-medium leading-6 text-white"
                         >
-                            Username
+                            Full Name
                         </label>
                         <div className="mt-2">
                             <input
                                 id="username"
                                 name="username"
-                                placeholder="Enter username"
+                                placeholder="Enter Full Name"
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
