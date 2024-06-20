@@ -94,10 +94,21 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
  
   return (
     <div className="mx-auto bg-[#031525] min-h-screen px-4 py-8">
-      <Link href={`/Profile/${randomUserId}`}>
-      <FaUserCircle className="mr-[600px] w-[60px] hover:bg-slate-300"/> 
-      </Link>
-      <h2 className="text-2xl font-bold mb-4">Assets Dashboard</h2>
+      <div className="flex ">
+        <div className="w-2/6">
+        <h2 className="text-2xl font-bold mb-4">Assets Dashboard</h2>
+        </div>
+       
+        <div className="  flex ml-[900px] justify-center size-10 rounded-full items-center hover:bg-slate-300">
+          <Link href={`/Profile/${randomUserId}`}>
+          <FaUserCircle  size={30}/> 
+          </Link>
+      </div>
+      
+      </div>
+      
+    
+      
       <input
         type="text"
         placeholder="Search Assets..."
