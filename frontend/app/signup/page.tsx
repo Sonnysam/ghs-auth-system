@@ -5,6 +5,9 @@ import Link from "next/link";
 import toast, { Toaster } from 'react-hot-toast';
 import Logo from "@/components/Logo";
 import "../../styles/style.css";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/firebase/firebase";
 
 
 const Signup = () => {
@@ -14,7 +17,6 @@ const Signup = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleSignup = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
         if (!email || !password || !name) {
             toast.error('Please fill all fields', {
                 duration: 1000,
@@ -23,8 +25,40 @@ const Signup = () => {
             });
             return;
         }
+        setLoading(true);
+        e.preventDefault();
+        try {
+            await createUserWithEmailAndPassword(auth, email.trim(), password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    setLoading(false);
+                    setDoc(doc(db, "users", user.uid), {
+                        Name: name,
+                        Email: email.trim(),
+                        Uid: user.uid,
+                        CreatedAt: new Date().toUTCString(),
+                    });
+                })
+                .then(() =>
+                    toast.success('Account created successfully', {
+                        duration: 1000,
+                        position: "top-right",
+                        icon: '🔓'
+                    })
+                )
+            setLoading(false);
+            setTimeout(() => {
+                window.location.href = "/login";
+            }, 1000);
+        } catch (error: any) {
+            toast.error('An error occurred', {
+                duration: 1000,
+                position: "top-right",
+                icon: '🔐'
+            });
+            setLoading(false);
+        }
     }
-
 
 
     return (
