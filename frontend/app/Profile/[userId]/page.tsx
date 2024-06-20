@@ -1,6 +1,7 @@
 // Profile.tsx
 "use client";
 import { useEffect, useState } from 'react';
+import UserCard from '@/components/userCard';
 
 type ProfileData = {
     name: string;
@@ -36,19 +37,17 @@ export default function Profile({ params }: { params: { userId: string } }) {
         };
 
         fetchProfile();
-    }, [params.userId]); // Dependency array correctly includes params.userId
+    }, [params.userId,url]); // Dependency array correctly includes params.userId
 
     if (!profileData) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div>
-            <h2>User Profile</h2>
-            <p><strong>Username:</strong> {profileData.name}</p>
-            <p><strong>User ID:</strong> {profileData.userId}</p>
-            <p><strong>Department:</strong> {profileData.department}</p>
-            <p><strong>Next Pay Day:</strong> {profileData.nextPayDay}</p>
+        <div className=' flex flex-col text-black bg-slate-100 items-center justify-center h-screen'>
+             <h1 className=" text-3xl text-slate-900"> Hello, {profileData.name} You are Welcome</h1>
+            <UserCard department={profileData.department} name={profileData.name} payDay={profileData.nextPayDay} userId={profileData.userId}/>
+
         </div>
     );
 }
