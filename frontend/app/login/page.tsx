@@ -10,10 +10,12 @@ import { auth, db } from "@/firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
+    
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<any>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [userToken, setUserToken] = useState<any>()
+    const detail =email
 
     const handleSignin = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
@@ -41,9 +43,10 @@ const Login = () => {
                     position: "top-right",
                     icon: "🔓",
                 });
+                console.log(userCredential.user.email)
                 setTimeout(() => {
                     window.location.href = "/dashboard";
-                }, 2000);
+                }, 1000);
             });
         } catch (error: any) {
             toast.error("Invalid email or password", {
@@ -56,10 +59,14 @@ const Login = () => {
     };
 
 
+  
+
     const getUserData = async (user: any) => {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
-
+        console.log("user details:",user)
+        const detail = user
+        
         if (docSnap.exists()) {
             setUserToken(user)
         } else {
@@ -73,8 +80,6 @@ const Login = () => {
     useEffect(() => {
         getUserData;
     });
-
-
 
     return (
         <>
