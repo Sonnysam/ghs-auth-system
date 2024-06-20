@@ -1,8 +1,11 @@
 "use client";
 import React, { useState } from "react";
 
+<<<<<<< HEAD
 import Profile from "../Profile/page";
 
+=======
+>>>>>>> 927ce0693796f2291a67eba060d3ea8b8657a43a
 // Updated Asset interface
 interface Asset {
   tagId: string;
@@ -78,11 +81,16 @@ const Dashboard = () => {
     asset.assetName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+<<<<<<< HEAD
   const onHover = " hover:bg-slate-200 hover:text-cyan-950"
 
   return (
     <div className="container mx-auto px-4 py-8">
       <Profile />
+=======
+  return (
+    <div className="mx-auto bg-[#031525] min-h-screen px-4 py-8">
+>>>>>>> 927ce0693796f2291a67eba060d3ea8b8657a43a
       <h2 className="text-2xl font-bold mb-4">Assets Dashboard</h2>
       <input
         type="text"
@@ -95,6 +103,7 @@ const Dashboard = () => {
         <table className="w-full border-collapse">
           <thead>
             <tr>
+<<<<<<< HEAD
               <th className={`${onHover } border px-4 py-2`}>Tag ID</th>
               <th className={`${onHover } border px-4 py-2`}>Serial Number</th>
               <th className={`${onHover } border px-4 py-2`}>Asset Name</th>
@@ -109,11 +118,28 @@ const Dashboard = () => {
               <th className={`${onHover } border px-4 py-2`}>Maintenance Records</th>
               <th className={`${onHover } border px-4 py-2`}>Warranty Info.</th>
               <th className={`${onHover } border px-4 py-2`}>Lifecycle Tracking</th>
+=======
+              <th className="border px-4 py-2">Tag ID</th>
+              <th className="border px-4 py-2">Serial Number</th>
+              <th className="border px-4 py-2">Asset Name</th>
+              <th className="border px-4 py-2">Description</th>
+              <th className="border px-4 py-2">Category</th>
+              <th className="border px-4 py-2">Subcategory</th>
+              <th className="border px-4 py-2">Procurement Date</th>
+              <th className="border px-4 py-2">Vendor Information</th>
+              <th className="border px-4 py-2">Location</th>
+              <th className="border px-4 py-2">Department</th>
+              <th className="border px-4 py-2">Condition &amp; Status</th>
+              <th className="border px-4 py-2">Maintenance Records</th>
+              <th className="border px-4 py-2">Warranty Info.</th>
+              <th className="border px-4 py-2">Lifecycle Tracking</th>
+>>>>>>> 927ce0693796f2291a67eba060d3ea8b8657a43a
             </tr>
           </thead>
           <tbody>
             {filteredAssets.map((asset) => (
               <tr key={asset.tagId}>
+<<<<<<< HEAD
                 <td className={`${onHover } border px-4 py-2`}>{asset.tagId}</td>
                 <td className={`${onHover } border px-4 py-2`}>{asset.serialNumber}</td>
                 <td className={`${onHover } border px-4 py-2`}>{asset.assetName}</td>
@@ -128,6 +154,22 @@ const Dashboard = () => {
                 <td className={`${onHover } border px-4 py-2`}>{asset.maintenanceRecords}</td>
                 <td className={`${onHover } border px-4 py-2`}>{asset.warrantyInformation}</td>
                 <td className={`${onHover } border px-4 py-2`}>{asset.lifecycleTracking}</td>
+=======
+                <td className="border px-4 py-2">{asset.tagId}</td>
+                <td className="border px-4 py-2">{asset.serialNumber}</td>
+                <td className="border px-4 py-2">{asset.assetName}</td>
+                <td className="border px-4 py-2">{asset.description}</td>
+                <td className="border px-4 py-2">{asset.category}</td>
+                <td className="border px-4 py-2">{asset.subcategory}</td>
+                <td className="border px-4 py-2">{asset.procurementDate}</td>
+                <td className="border px-4 py-2">{asset.vendorInformation}</td>
+                <td className="border px-4 py-2">{asset.location}</td>
+                <td className="border px-4 py-2">{asset.department}</td>
+                <td className="border px-4 py-2">{asset.conditionAndStatus}</td>
+                <td className="border px-4 py-2">{asset.maintenanceRecords}</td>
+                <td className="border px-4 py-2">{asset.warrantyInformation}</td>
+                <td className="border px-4 py-2">{asset.lifecycleTracking}</td>
+>>>>>>> 927ce0693796f2291a67eba060d3ea8b8657a43a
               </tr>
             ))}
           </tbody>
