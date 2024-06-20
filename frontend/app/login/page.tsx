@@ -15,7 +15,10 @@ const Login = () => {
     const [password, setPassword] = useState<any>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [userToken, setUserToken] = useState<any>()
+<<<<<<< HEAD
     const detail =email
+=======
+>>>>>>> main
 
     const handleSignin = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
@@ -43,10 +46,16 @@ const Login = () => {
                     position: "top-right",
                     icon: "🔓",
                 });
+<<<<<<< HEAD
                 console.log(userCredential.user.email)
                 setTimeout(() => {
                     window.location.href = "/dashboard";
                 }, 1000);
+=======
+                setTimeout(() => {
+                    window.location.href = "/dashboard";
+                }, 2000);
+>>>>>>> main
             });
         } catch (error: any) {
             toast.error("Invalid email or password", {
@@ -59,7 +68,28 @@ const Login = () => {
     };
 
 
+<<<<<<< HEAD
   
+=======
+    const getUserData = async (user: any) => {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            setUserToken(user)
+        } else {
+            return toast.error("User not found", {
+                duration: 2000,
+                position: "top-right",
+                icon: "🔐",
+            });
+        }
+    };
+    useEffect(() => {
+        getUserData;
+    });
+
+>>>>>>> main
 
     const getUserData = async (user: any) => {
         const docRef = doc(db, "users", user.uid);

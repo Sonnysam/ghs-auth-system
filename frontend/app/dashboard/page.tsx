@@ -72,10 +72,10 @@ const assetsData: Asset[] = [
   },
 ];
 
-const Dashboard = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
   const filteredAssets = assetsData.filter((asset) =>
     asset.assetName.toLowerCase().includes(searchQuery.toLowerCase())
+  
   );
   
   const userIdArray = ["a14d", "aq2n"];
@@ -94,7 +94,6 @@ const Dashboard = () => {
     setRandomUserId(getRandomUserId(userIdArray));
   }, [userIdArray]);
  
-  const id = "sdcs"
   return (
     <div className="mx-auto bg-[#031525] min-h-screen px-4 py-8">
       <Link href={`/Profile/${randomUserId}`}>
@@ -151,7 +150,12 @@ const Dashboard = () => {
         </table>
       </div>
     </div>
-  );
-};
+    
+   )
+}
+ 
+
+
+
 
 export default Dashboard;

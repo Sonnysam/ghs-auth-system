@@ -39,7 +39,11 @@ const Welcome = () => {
             </div>
             <p className="text-center mt-4 text-lg px-5 sm:px-0">
                 <a
+<<<<<<< HEAD
                     href="/dashboard"
+=======
+                    href="#"
+>>>>>>> main
                     className="bg-white text-black py-3 px-4 rounded-md hover:text-black"
                 >
                     Learn More
