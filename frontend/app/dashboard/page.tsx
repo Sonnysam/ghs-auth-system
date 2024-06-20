@@ -80,16 +80,14 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
   
   const userIdArray = ["a14d", "aq2n"];
 
-  // Function to get a random userId from the list
+
   const getRandomUserId = (list:any) => {
     const randomIndex = Math.floor(Math.random() * list.length);
     return list[randomIndex];
   };
 
-  // State to hold the random userId
   const [randomUserId, setRandomUserId] = useState('');
 
-  // Use useEffect to set the random userId when the component mounts
   useEffect(() => {
     setRandomUserId(getRandomUserId(userIdArray));
   }, [userIdArray]);
@@ -97,7 +95,7 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
   return (
     <div className="mx-auto bg-[#031525] min-h-screen px-4 py-8">
       <Link href={`/Profile/${randomUserId}`}>
-      <FaUserCircle /> 
+      <FaUserCircle className="mr-[600px] w-[60px] hover:bg-slate-300"/> 
       </Link>
       <h2 className="text-2xl font-bold mb-4">Assets Dashboard</h2>
       <input
