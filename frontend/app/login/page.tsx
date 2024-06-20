@@ -15,10 +15,6 @@ const Login = () => {
     const [password, setPassword] = useState<any>("");
     const [loading, setLoading] = useState<boolean>(false);
     const [userToken, setUserToken] = useState<any>()
-<<<<<<< HEAD
-    const detail =email
-=======
->>>>>>> main
 
     const handleSignin = async (e: { preventDefault: () => void }) => {
         e.preventDefault();
@@ -46,16 +42,13 @@ const Login = () => {
                     position: "top-right",
                     icon: "🔓",
                 });
-<<<<<<< HEAD
                 console.log(userCredential.user.email)
                 setTimeout(() => {
                     window.location.href = "/dashboard";
                 }, 1000);
-=======
                 setTimeout(() => {
                     window.location.href = "/dashboard";
                 }, 2000);
->>>>>>> main
             });
         } catch (error: any) {
             toast.error("Invalid email or password", {
@@ -68,9 +61,7 @@ const Login = () => {
     };
 
 
-<<<<<<< HEAD
   
-=======
     const getUserData = async (user: any) => {
         const docRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(docRef);
@@ -89,28 +80,8 @@ const Login = () => {
         getUserData;
     });
 
->>>>>>> main
 
-    const getUserData = async (user: any) => {
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        console.log("user details:",user)
-        const detail = user
-        
-        if (docSnap.exists()) {
-            setUserToken(user)
-        } else {
-            return toast.error("User not found", {
-                duration: 2000,
-                position: "top-right",
-                icon: "🔐",
-            });
-        }
-    };
-    useEffect(() => {
-        getUserData;
-    });
-
+  
     return (
         <>
             <div className="flex bg-[#031525] min-h-full flex-1 flex-col justify-center px-6 lg:px-8">

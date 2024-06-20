@@ -80,26 +80,35 @@ const Dashboard = () => { const[searchQuery, setSearchQuery] = useState("");
   
   const userIdArray = ["a14d", "aq2n"];
 
-  // Function to get a random userId from the list
+
   const getRandomUserId = (list:any) => {
     const randomIndex = Math.floor(Math.random() * list.length);
     return list[randomIndex];
   };
 
-  // State to hold the random userId
   const [randomUserId, setRandomUserId] = useState('');
 
-  // Use useEffect to set the random userId when the component mounts
   useEffect(() => {
     setRandomUserId(getRandomUserId(userIdArray));
   }, [userIdArray]);
  
   return (
     <div className="mx-auto bg-[#031525] min-h-screen px-4 py-8">
-      <Link href={`/Profile/${randomUserId}`}>
-      <FaUserCircle /> 
-      </Link>
-      <h2 className="text-2xl font-bold mb-4">Assets Dashboard</h2>
+      <div className="flex ">
+        <div className="w-2/6">
+        <h2 className="text-2xl font-bold mb-4">Assets Dashboard</h2>
+        </div>
+       
+        <div className="  flex ml-[900px] justify-center size-10 rounded-full items-center hover:bg-slate-300">
+          <Link href={`/Profile/${randomUserId}`}>
+          <FaUserCircle  size={30}/> 
+          </Link>
+      </div>
+      
+      </div>
+      
+    
+      
       <input
         type="text"
         placeholder="Search Assets..."
