@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBEH4_cocXB9JBeb9gwgysTaZWgoKk1jUw",
-  authDomain: "luggage-pro.firebaseapp.com",
-  projectId: "luggage-pro",
-  storageBucket: "luggage-pro.appspot.com",
-  messagingSenderId: "673210161055",
-  appId: "1:673210161055:web:037e2a89157d4b57a7cfaa",
+  apiKey: "AIzaSyAPmm0prboCCMFYvSuYLTAoWtRagwTwehs",
+  authDomain: "ghs-auth-11047.firebaseapp.com",
+  projectId: "ghs-auth-11047",
+  storageBucket: "ghs-auth-11047.appspot.com",
+  messagingSenderId: "576364255503",
+  appId: "1:576364255503:web:ce380ceceb72301904467a",
 };
 
 // Initialize Firebase
