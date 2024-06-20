@@ -81,26 +81,7 @@ const Login = () => {
     });
 
 
-    const getUserData = async (user: any) => {
-        const docRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(docRef);
-        console.log("user details:",user)
-        const detail = user
-        
-        if (docSnap.exists()) {
-            setUserToken(user)
-        } else {
-            return toast.error("User not found", {
-                duration: 2000,
-                position: "top-right",
-                icon: "🔐",
-            });
-        }
-    };
-    useEffect(() => {
-        getUserData;
-    });
-
+  
     return (
         <>
             <div className="flex bg-[#031525] min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
